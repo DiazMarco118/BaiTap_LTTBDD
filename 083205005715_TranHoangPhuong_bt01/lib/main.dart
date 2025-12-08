@@ -39,9 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: () {},
           ),
         ),
         actions: [
@@ -81,10 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
-            const Text(
-              'UTH, Vietnam',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-            ),
+            const Text('UTH, Vietnam', style: TextStyle(fontSize: 20)),
           ],
         ),
       ),
