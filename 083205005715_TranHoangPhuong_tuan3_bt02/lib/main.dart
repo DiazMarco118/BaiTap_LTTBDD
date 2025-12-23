@@ -4,7 +4,6 @@ void main() {
   runApp(const MyApp());
 }
 
-// OOP Model - Payment Method
 class PaymentMethod {
   final String id;
   final String name;
@@ -28,7 +27,7 @@ class PaymentMethod {
   }
 }
 
-// OOP Service - Payment Service
+// đóng gói
 class PaymentService {
   final List<PaymentMethod> _paymentMethods = []; // đóng gói với private _
   // Chỉ cung cấp public methods để truy cập an toàn
@@ -62,7 +61,7 @@ class PaymentService {
 
   void selectPaymentMethod(String id) {
     // tính trừu tượng
-    //Che giấu chi tiết này- người dùng ko cần biết cách thực hiện
+    //Che giấu chi tiết này- ng dùg ko cần biết cách thực hiện
     for (var method in _paymentMethods) {
       if (method.id == id) {
         method.select();
@@ -105,8 +104,7 @@ class PaymentSelectionPage extends StatefulWidget {
 
 class _PaymentSelectionPageState extends State<PaymentSelectionPage> {
   late PaymentService _paymentService;
-  late List<PaymentMethod>
-  _paymentMethods; //Các class khác tận dụng lớp PaymentMethod - kế thừa
+  late List<PaymentMethod> _paymentMethods;
   PaymentMethod? _selectedPaymentMethod;
 
   @override
@@ -145,7 +143,6 @@ class _PaymentSelectionPageState extends State<PaymentSelectionPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Hiển thị logo ảnh được chọn
               if (_selectedPaymentMethod != null)
                 Center(
                   child: Container(
@@ -199,6 +196,7 @@ class _PaymentSelectionPageState extends State<PaymentSelectionPage> {
 }
 
 class PaymentMethodCard extends StatelessWidget {
+  // kế thừa
   final PaymentMethod paymentMethod;
   final Function(String) onSelected;
 

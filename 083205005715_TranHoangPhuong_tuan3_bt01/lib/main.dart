@@ -39,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _submitForm() {
     final name = _nameController.text.trim();
-    final mail = _mailController.text.trim(); // Sửa: dùng _mailController
-    final phone = _phoneController.text.trim(); // Sửa: dùng _phoneController
+    final mail = _mailController.text.trim();
+    final phone = _phoneController.text.trim();
 
     setState(() {
       _resultName = name.isEmpty ? null : name;

@@ -1,16 +1,18 @@
-# baitap_tuan3_01
+# Bài Tập Tuần 3 - Nullable Types
 
-A new Flutter project.
+Ứng dụng Flutter demo về cách xử lý Nullable. Bài tập làm quen với việc khai báo và quản lý các biến có thể nhận giá trị `null`.
 
-## Getting Started
+## Tính năng chính
 
-This project is a starting point for a Flutter application.
+- **Form nhập liệu**: Nhập tên, email và số điện thoại
+- **Xử lý null**: Các trường input sử dụng `String?` (nullable string)
+- **Nút Submit**: Xác nhận dữ liệu và hiển thị kết quả
+- **Nút Reset**: Xóa toàn bộ dữ liệu và đặt lại giá trị null
+- **Hiển thị kết quả**: Hiện tên, email và số điện thoại (hoặc null nếu không nhập)
 
-A few resources to get you started if this is your first Flutter project:
+## Các khái niệm chính
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Nullable Type (`String?`)**: Biến có thể chứa giá trị `null`
+2. **Điều kiện kiểm tra rỗng**: `isEmpty` để kiểm tra chuỗi trống
+3. **State Management**: Sử dụng `setState()` để cập nhật UI
+4. **TextEditingController**: Quản lý dữ liệu từ TextField

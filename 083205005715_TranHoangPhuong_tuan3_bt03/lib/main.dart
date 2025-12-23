@@ -5,13 +5,13 @@ void main() {
   runApp(const MyApp());
 }
 
-// ============ TÍNH TRỪU TƯỢNG: Lớp cơ sở trừu tượng ============
+//TÍNH TRỪU TƯỢNG: Lớp cơ sở trừu tượng
 abstract class LibraryEntity {
   String get name;
-  String getInfo();
+  String getInfo(); // đa hình
 }
 
-// ============ TÍNH ĐÓNG GÓI: Các thuộc tính riêng tư với getter ============
+// TÍNH ĐÓNG GÓI: Các thuộc tính riêng tư với getter
 class Book implements LibraryEntity {
   final String _id;
   final String _name;
@@ -40,7 +40,7 @@ class Book implements LibraryEntity {
   }
 }
 
-// ============ TÍNH ĐÓNG GÓI: Các thuộc tính riêng tư với getter ============
+//  TÍNH ĐÓNG GÓI: Các thuộc tính riêng tư với getter
 class User implements LibraryEntity {
   final String _id;
   final String _name;
@@ -62,7 +62,7 @@ class User implements LibraryEntity {
   }
 }
 
-// ============ TÍNH KẾ THỪA: Kế thừa từ LibraryEntity ============
+//  TÍNH KẾ THỪA: Kế thừa từ LibraryEntity
 class Staff implements LibraryEntity {
   final String _id;
   final String _name;
@@ -84,7 +84,6 @@ class Staff implements LibraryEntity {
   }
 }
 
-// ============ TÍNH ĐA HÌNH: Các class khác nhau có cùng interface ============
 class BorrowRecord {
   final String userId;
   final List<String> bookIds;
@@ -122,8 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // Dữ liệu mẫu
   late List<Book> books = mockBooks;
-  late List<User> users = mockUsers;
-  late List<Staff> staffList = mockStaffList;
+  late List<User> users = List.from(mockUsers);
 
   late List<BorrowRecord> borrowRecords = [];
 
@@ -199,13 +197,15 @@ class _MyHomePageState extends State<MyHomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Quản lý'),
           BottomNavigationBarItem(icon: Icon(Icons.book), label: 'DS Sách'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Nhân viên'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Người dùng',
+          ),
         ],
       ),
     );
   }
 
-  // ============ TAB 1: QUẢN LÝ ============
   Widget _buildManagementTab() {
     User? selectedUser = users.firstWhereOrNull((u) => u.id == _selectedUserId);
 
@@ -222,8 +222,6 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-
-          // Phần chọn người dùng
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -403,19 +401,89 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  // ============ TAB 3: NHÂN VIÊN ============
   Widget _buildStaffTab() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [SizedBox(height: 50), ..._buildStaffCardList()],
+        children: [
+          SizedBox(height: 50),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: _showAddStaffDialog,
+              icon: const Icon(Icons.add),
+              label: const Text('Thêm người dùng'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                backgroundColor: Colors.blueAccent,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          ..._buildStaffCardList(),
+        ],
+      ),
+    );
+  }
+
+  void _showAddStaffDialog() {
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Thêm người dùng mới'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(labelText: 'Tên người dùng'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Hủy'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (nameController.text.isNotEmpty &&
+                  emailController.text.isNotEmpty) {
+                setState(() {
+                  final lastId = int.parse(users.last.id);
+                  final newId = (lastId + 1).toString().padLeft(3, '0');
+                  users.add(
+                    User(
+                      id: newId,
+                      name: nameController.text,
+                      email: emailController.text,
+                    ),
+                  );
+                });
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Thêm người dùng thành công!')),
+                );
+              }
+            },
+            child: const Text('Thêm'),
+          ),
+        ],
       ),
     );
   }
 
   List<Widget> _buildStaffCardList() {
-    return staffList.map((staff) {
+    return users.map((user) {
       return SizedBox(
         width: double.infinity,
         height: 140,
@@ -428,16 +496,16 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  staff.name,
+                  user.name,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text('Chức vụ: ${staff.position}'),
-                Text('ID: ${staff.id}'),
+                Text('Email: ${user.email}'),
+                Text('ID: ${user.id}'),
                 Text(
-                  staff.getInfo(),
+                  user.getInfo(),
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],
@@ -449,7 +517,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// Extension để tìm phần tử đầu tiên hoặc null
 extension ListExtension<T> on List<T> {
   T? firstWhereOrNull(bool Function(T) test) {
     for (var element in this) {

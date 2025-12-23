@@ -13,9 +13,3 @@ final List<User> mockUsers = [
   User(id: '002', name: 'Trần Thị B', email: 'tb@email.com'),
   User(id: '003', name: 'Lê Văn C', email: 'vc@email.com'),
 ];
-
-// Dữ liệu mẫu - Danh sách nhân viên
-final List<Staff> mockStaffList = [
-  Staff(id: 'S001', name: 'Hoàng Thị Liên', position: 'Thủ thư'),
-  Staff(id: 'S002', name: 'Võ Ngọc Huy', position: 'Nhân viên thư viện'),
-];
