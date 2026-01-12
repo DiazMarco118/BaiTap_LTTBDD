@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/onboarding_model.dart';
+import 'login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -59,6 +60,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
+      );
+    } else {
+      // Navigate to Login Screen
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
     }
   }
