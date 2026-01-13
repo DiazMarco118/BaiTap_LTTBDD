@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 class FCMService {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
-  // Initialize FCM
+  // Init FCM
   Future<void> initialize() async {
     // Request permission for iOS
     NotificationSettings settings = await _messaging.requestPermission(
@@ -51,7 +51,6 @@ class FCMService {
             'Message also contained a notification: ${message.notification}',
           );
         }
-        // TODO: Show local notification
       }
     });
 
@@ -60,7 +59,6 @@ class FCMService {
       if (kDebugMode) {
         print('A new onMessageOpenedApp event was published!');
       }
-      // TODO: Navigate to specific screen based on notification
     });
   }
 

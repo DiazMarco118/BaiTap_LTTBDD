@@ -9,7 +9,6 @@ import 'firebase_options.dart';
 import 'services/fcm_service.dart';
 import 'services/remote_config_service.dart';
 
-// Handle background messages
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -27,12 +26,10 @@ void main() async {
     return true;
   };
 
-  // Initialize FCM
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   final fcmService = FCMService();
   await fcmService.initialize();
 
-  // Initialize Remote Config
   final remoteConfigService = RemoteConfigService();
   await remoteConfigService.initialize();
 

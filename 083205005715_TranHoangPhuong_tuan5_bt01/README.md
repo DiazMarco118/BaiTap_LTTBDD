@@ -39,10 +39,7 @@ Hướng dẫn người dùng về tính năng chính của ứng dụng:
 
 ### 1. Firebase Authentication
 
-- Đăng nhập bằng Email/Password
 - Đăng nhập bằng Google Sign-In
-- Đăng ký tài khoản mới
-- Đăng xuất
 
 ### 2. Cloud Firestore Database
 
@@ -53,11 +50,7 @@ Hướng dẫn người dùng về tính năng chính của ứng dụng:
 ### 3. Firebase Cloud Messaging (FCM)
 
 - Nhận thông báo push notification
-- Topic subscription: all_users
-- Xử lý notification ở foreground và background
 
 ### 4. Firebase Remote Config
 
-- Cấu hình động từ Firebase Console
-- 7 parameters: welcome_message, banner_text, show_premium_feature, app_theme_color, support_email, maintenance_mode, max_file_upload
-- Fetch interval: Duration.zero (testing mode)
+- parameters: welcome_message
