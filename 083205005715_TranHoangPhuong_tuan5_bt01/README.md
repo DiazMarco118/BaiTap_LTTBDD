@@ -54,3 +54,5 @@ Hướng dẫn người dùng về tính năng chính của ứng dụng:
 ### 4. Firebase Remote Config
 
 - parameters: welcome_message
+
+### Ứng dụng thêm Api lấy ra các task và thực hiện các thao tác get data và delete data

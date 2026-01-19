@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'onboarding_screen.dart';
+import 'main_screen.dart';
 
 class UTHCoverScreen extends StatefulWidget {
   const UTHCoverScreen({super.key});
@@ -13,14 +13,14 @@ class _UTHCoverScreenState extends State<UTHCoverScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToOnboarding();
+    _navigateToMain();
   }
 
-  void _navigateToOnboarding() {
+  void _navigateToMain() {
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+          MaterialPageRoute(builder: (context) => MainScreen()),
         );
       }
     });
